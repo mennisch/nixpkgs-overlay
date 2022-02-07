@@ -14,11 +14,8 @@ function find-ssh-auth-sock() {
 }
 
 if ! check-ssh-auth-sock; then
-  echo "Invalid ssh auth sock"
   new_sock=$(find-ssh-auth-sock)
-  echo "Found: ${new_sock}"
   if [ ! -z ${new_sock} ]; then
-    echo "Exporting ${new_sock}"
     export SSH_AUTH_SOCK="${new_sock}"
   fi
 fi
