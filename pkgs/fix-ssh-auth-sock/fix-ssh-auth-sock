@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+function check-ssh-auth-sock() {
+  timeout 1 ssh-add -l >& /dev/null
+}
+
+function find-ssh-auth-sock() {
+  for sock in $(find /tmp -wholename '/tmp/ssh-*/agent.*' -user ${SUDO_USER:-${USER}} 2>/dev/null); do
+    if SSH_AUTH_SOCK="${sock}" check-ssh-auth-sock; then
+      echo ${sock}
+      return 0
+    fi
+  done
+}
+
+if ! check-ssh-auth-sock; then
+  echo "Invalid ssh auth sock"
+  new_sock=$(find-ssh-auth-sock)
+  echo "Found: ${new_sock}"
+  if [ ! -z ${new_sock} ]; then
+    echo "Exporting ${new_sock}"
+    export SSH_AUTH_SOCK="${new_sock}"
+  fi
+fi

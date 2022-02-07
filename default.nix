@@ -12,4 +12,6 @@
   lib = import ./lib { inherit pkgs; }; # functions
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
+
+  fix-ssh-auth-sock = pkgs.callPackage ./pkgs/fix-ssh-auth-sock {};
 }
