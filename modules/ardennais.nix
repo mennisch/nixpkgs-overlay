@@ -33,6 +33,7 @@ mennisch-url: { config, lib, pkgs, ... }: {
     tmpOnTmpfs = true;
   };
   environment.systemPackages = with pkgs; [
+    fix-ssh-auth-sock
     restic
   ];
   fileSystems = {
