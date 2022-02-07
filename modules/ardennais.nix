@@ -57,7 +57,7 @@
     # high-resolution display
     video.hidpi.enable = lib.mkDefault true;
   };
-  import = [ ./user-root.nix ];
+  imports = [ ./user-root.nix ];
   networking = {
     domain = "mennish.net";
     firewall.allowedTCPPorts = [
