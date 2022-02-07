@@ -85,27 +85,7 @@ mennisch-url: { config, lib, pkgs, ... }: {
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
   programs = {
     bash.interactiveShellInit = ''
-      function check-ssh-auth-sock() {
-        timeout 1 ssh-add -l >& /dev/null
-      }
-
-      function find-ssh-auth-sock() {
-        for sock in $(find /tmp -wholename '/tmp/ssh-*/agent.*' -user $USER 2>/dev/null); do
-          if SSH_AUTH_SOCK="$sock" check-ssh-auth-sock; then
-            echo $sock
-            return 0
-          fi
-        done
-      }
-
-      function fix-ssh-auth-sock() {
-        if ! check-ssh-auth-sock; then
-          new_sock=$(find-ssh-auth-sock)
-          if [ ! -z $new_sock ]; then
-            export SSH_AUTH_SOCK="$new_sock"
-          fi
-        fi
-      }
+      . fix-ssh-auth-sock
     '';
     git = {
       config.init.defaultBranch = "main";
