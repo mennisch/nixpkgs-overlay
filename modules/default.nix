@@ -1,4 +1,3 @@
 {
-  ardennais = import ./ardennais.nix;
-  user-root = ./user-root.nix;
+  init = import ./init.nix;
 }

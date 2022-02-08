@@ -1,4 +1,4 @@
-mennisch-url: { config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   boot = {
     initrd = {
       availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
@@ -73,14 +73,6 @@ mennisch-url: { config, lib, pkgs, ... }: {
     # Per-interface useDHCP will be mandatory in the future, so this generated config
     # replicates the default behaviour.
     useDHCP = false;
-  };
-  nixpkgs.config = {
-    allowUnfree = true;
-    packageOverrides = pkgs: {
-      mennisch = import (builtins.fetchTarball mennisch-url) {
-        inherit pkgs;
-      };
-    };
   };
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
   programs = {
