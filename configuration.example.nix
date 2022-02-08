@@ -6,5 +6,5 @@ let
   override = import (builtins.fetchTarball url);
   mennisch = override {};
 in {
-  imports = [ (mennisch.modules.init override "bastion") ];
+  imports = [ (mennisch.modules.init override "<HOST>") ];
 }
