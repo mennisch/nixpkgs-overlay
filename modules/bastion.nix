@@ -143,13 +143,6 @@ in {
         "books.mennisch.net" = {
           forceSSL = true;
           locations."/" = {
-            proxyPass = "http://aurochs.local:8001";
-          };
-          useACMEHost = "mennisch.net";
-        };
-        "books2.mennisch.net" = {
-          forceSSL = true;
-          locations."/" = {
             proxyPass = "http://ardennais.local:2000";
           };
           useACMEHost = "mennisch.net";
