@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   networking = {
-    firewall.allowedTCPPorts = [ 8001 ];
+    firewall.allowedTCPPorts = [ 2000 ];
   };
   services = {
     postgresql = {

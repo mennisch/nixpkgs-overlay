@@ -150,7 +150,7 @@ in {
         "books2.mennisch.net" = {
           forceSSL = true;
           locations."/" = {
-            proxyPass = "http://ardennais.local:8001";
+            proxyPass = "http://ardennais.local:2000";
           };
           useACMEHost = "mennisch.net";
         };
