@@ -89,6 +89,7 @@ in {
       acceptTerms = true;
       certs."mennisch.net".extraDomainNames = [
         "books.mennisch.net"
+        "books2.mennisch.net"
         "bw.mennisch.net"
       ];
       email = "thinkerer@mennisch.net";
@@ -143,6 +144,13 @@ in {
           forceSSL = true;
           locations."/" = {
             proxyPass = "http://aurochs.local:8001";
+          };
+          useACMEHost = "mennisch.net";
+        };
+        "books2.mennisch.net" = {
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://ardennais.local:8001";
           };
           useACMEHost = "mennisch.net";
         };
