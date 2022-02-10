@@ -61,12 +61,10 @@
   imports = [
     ./bookwyrm.nix
     ./user-root.nix
+    ./vaultwarden.nix
   ];
   networking = {
     domain = "mennish.net";
-    firewall.allowedTCPPorts = [
-      8000 # vaultwarden
-    ];
     hostName = "ardennais";
     interfaces = {
       eth0.useDHCP = true;
@@ -124,23 +122,6 @@
       enable = true;
       passwordAuthentication = false;
     };
-    postgresql = {
-      enable = true;
-      ensureDatabases = [ "vaultwarden" ];
-      ensureUsers = [
-        {
-          name = "vaultwarden";
-          ensurePermissions = {
-            "DATABASE vaultwarden" = "ALL PRIVILEGES";
-          };
-        }
-      ];
-    };
-    postgresqlBackup = {
-      databases = [ "vaultwarden" ];
-      enable = true;
-      startAt = "*-*-* *:00:00";
-    };
     restic.backups = {
       postgresql = {
         environmentFile = "/var/lib/restic/environment";
@@ -166,27 +147,6 @@
         };
         user = "vaultwarden";
       };
-    };
-    vaultwarden = {
-      config = {
-        DATABASE_URL = "postgresql:///vaultwarden";
-        DOMAIN = "https://bw.mennisch.net";
-        INVITATION_ORG_NAME = "mennisch";
-        REQUIRE_DEVICE_EMAIL = false;
-        ROCKET_ADDRESS = "172.27.1.2";
-        ROCKET_PORT = 8000;
-        SIGNUPS_ALLOWED = false;
-        SIGNUPS_VERIFY = true;
-        SMTP_FROM = "thinkerer@mennisch.net";
-        SMTP_FROM_NAME = "thinkerer";
-        SMTP_HOST = "email-smtp.us-east-1.amazonaws.com";
-        SMTP_PORT = 587;
-        SMTP_SSL = true;
-        SMTP_USERNAME = "AKIATT5PUYZJCTPX5VVZ";
-      };
-      dbBackend = "postgresql";
-      enable = true;
-      environmentFile = "/var/lib/bitwarden_rs/environment";
     };
     zerotierone = {
       enable = true;
@@ -222,9 +182,6 @@
           "vaultwarden"
         ];
       };
-      vaultwarden = {
-        gid = 995;
-      };
     };
     users = {
       thinkerer = {
@@ -234,9 +191,6 @@
         isNormalUser = true;
         openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlMoUDAszgQS6UX5jGi+ON0gtxwbwM6gb4nkFEwchJF thinkerer@mennisch.net" ];
         uid = 1000;
-      };
-      vaultwarden = {
-        uid = 997;
       };
     };
   };
