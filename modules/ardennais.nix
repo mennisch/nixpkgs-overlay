@@ -33,7 +33,6 @@
     tmpOnTmpfs = true;
   };
   environment.systemPackages = with pkgs; [
-    mennisch.fix-ssh-auth-sock
     restic
   ];
   fileSystems = {
@@ -60,6 +59,7 @@
   };
   imports = [
     ./bookwyrm.nix
+    ./fix-ssh-auth-sock.nix
     ./user-root.nix
     ./vaultwarden.nix
   ];
@@ -77,9 +77,6 @@
   };
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
   programs = {
-    bash.interactiveShellInit = ''
-      . fix-ssh-auth-sock
-    '';
     git = {
       config.init.defaultBranch = "main";
       enable = true;

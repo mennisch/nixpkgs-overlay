@@ -1,32 +1,11 @@
-{ lib, modulesPath, pkgs, ... }: let
-  fixSshAuthSock = ''
-      function check-ssh-auth-sock() {
-        timeout 1 ssh-add -l >& /dev/null
-      }
-
-      function find-ssh-auth-sock() {
-        for sock in $(find /tmp -wholename '/tmp/ssh-*/agent.*' -user $USER 2>/dev/null); do
-          if SSH_AUTH_SOCK="$sock" check-ssh-auth-sock; then
-            echo $sock
-            return 0
-          fi
-        done
-      }
-
-      function fix-ssh-auth-sock() {
-        if ! check-ssh-auth-sock; then
-          new_sock=$(find-ssh-auth-sock)
-          if [ ! -z $new_sock ]; then
-            export SSH_AUTH_SOCK="$new_sock"
-          fi
-        fi
-      }
-    '';
-in {
+{ lib, modulesPath, pkgs, ... }: {
   boot.cleanTmpDir = true;
   documentation.nixos.enable = false;
   ec2.hvm = true;
-  imports = [ "${modulesPath}/virtualisation/amazon-image.nix" ];
+  imports = [
+    "${modulesPath}/virtualisation/amazon-image.nix"
+    ./fix-ssh-auth-sock.nix
+  ];
   networking = {
     domain = "mennisch.net";
     firewall.allowedTCPPorts = [ 80 443 ];
@@ -46,9 +25,6 @@ in {
   };
   nixpkgs.config.allowUnfree = true;
   programs = {
-    bash = {
-      interactiveShellInit = fixSshAuthSock;
-    };
     git = {
       enable = true;
       config.init.defaultBranch = "main";
@@ -78,10 +54,6 @@ in {
         setw -g xterm-keys on
         setw -g monitor-activity on
       '';
-    };
-    zsh = {
-      enable = true;
-      interactiveShellInit = fixSshAuthSock;
     };
   };
   security = {
