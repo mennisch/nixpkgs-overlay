@@ -4,6 +4,7 @@
   ec2.hvm = true;
   imports = [
     "${modulesPath}/virtualisation/amazon-image.nix"
+    ./avahi.nix
     ./fix-ssh-auth-sock.nix
     ./tmux.nix
   ];
@@ -47,16 +48,6 @@
     };
   };
   services = {
-    avahi = {
-      enable = true;
-      interfaces = [ "ztuze32mv7" ];
-      nssmdns = true;
-      publish = {
-        addresses = true;
-        domain = true;
-        enable = true;
-      };
-    };
     nginx = {
       appendHttpConfig = ''
         # blocked IPs:

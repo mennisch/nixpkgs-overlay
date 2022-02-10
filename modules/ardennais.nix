@@ -58,6 +58,7 @@
     video.hidpi.enable = lib.mkDefault true;
   };
   imports = [
+    ./avahi.nix
     ./bookwyrm.nix
     ./fix-ssh-auth-sock.nix
     ./tmux.nix
@@ -85,14 +86,7 @@
   };
   services = {
     avahi = {
-      enable = true;
-      nssmdns = true;
-      interfaces = [ "eth0" "ztuze32mv7" ];
-      publish = {
-        addresses = true;
-        domain = true;
-        enable = true;
-      };
+      interfaces = [ "eth0" ];
     };
     openssh = {
       enable = true;
