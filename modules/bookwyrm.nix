@@ -31,6 +31,7 @@
   systemd.services = {
     bookwyrm = {
       after = [ "networking.target" "postgresql.service" "redis.service" ];
+      requires = [ "postgresql.service" ];
       path = [ pkgs.docker pkgs.git ];
       script = ''
         git checkout mennisch && docker compose up --remove-orphans
