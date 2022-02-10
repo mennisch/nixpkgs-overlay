@@ -32,9 +32,6 @@
     };
     tmpOnTmpfs = true;
   };
-  environment.systemPackages = with pkgs; [
-    restic
-  ];
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/b90ba330-3baa-4d08-88a4-3b461bb63667";
@@ -61,6 +58,7 @@
     ./avahi.nix
     ./bookwyrm.nix
     ./fix-ssh-auth-sock.nix
+    ./restic.nix
     ./tmux.nix
     ./user-root.nix
     ./vaultwarden.nix
@@ -92,32 +90,6 @@
       enable = true;
       passwordAuthentication = false;
     };
-    restic.backups = {
-      postgresql = {
-        environmentFile = "/var/lib/restic/environment";
-        passwordFile = "/var/lib/restic/repository-passphrase";
-        paths = [ "/var/backup/postgresql" ];
-        repository = "s3:s3.amazonaws.com/mennisch-restic";
-        timerConfig = {
-          OnCalendar = "hourly";
-        };
-        user = "postgres";
-      };
-      vaultwarden = {
-        environmentFile = "/var/lib/restic/environment";
-        extraBackupArgs = [
-          "--exclude=/var/lib/bitwarden_rs/icon_cache"
-          "--exclude=/var/lib/bitwarden_rs/sends"
-        ];
-        passwordFile = "/var/lib/restic/repository-passphrase";
-        paths = [ "/var/lib/bitwarden_rs" ];
-        repository = "s3:s3.amazonaws.com/mennisch-restic";
-        timerConfig = {
-          OnCalendar = "hourly";
-        };
-        user = "vaultwarden";
-      };
-    };
     zerotierone = {
       enable = true;
       joinNetworks = [ "9f77fc393e410b81" ];
@@ -144,15 +116,6 @@
   };
   users = {
     mutableUsers = false;
-    groups = {
-      restic = {
-        gid = 994;
-        members = [
-          "postgres"
-          "vaultwarden"
-        ];
-      };
-    };
     users = {
       thinkerer = {
         extraGroups = [ "wheel" ];
