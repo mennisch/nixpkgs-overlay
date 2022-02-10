@@ -33,7 +33,7 @@
       after = [ "networking.target" "postgresql.service" "redis.service" ];
       path = [ pkgs.docker pkgs.git ];
       script = ''
-        git checkout mennisch && docker compose up --build --remove-orphans
+        git checkout mennisch && docker compose up --remove-orphans
       '';
       serviceConfig = {
         Group = "users";
