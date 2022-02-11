@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: let
+{ s3Bucket }: { config, lib, pkgs, ... }: let
   cfg = config.services;
   defaults = {
     environmentFile = "/var/lib/restic/.env";
@@ -9,7 +9,7 @@
       "--keep-monthly 12"
       "--keep-yearly 75"
     ];
-    repository = "s3:s3.amazonaws.com/mennisch-restic";
+    repository = "s3:s3.amazonaws.com/${s3Bucket}";
     timerConfig.OnCalendar = "hourly";
   };
 in lib.mkMerge [
