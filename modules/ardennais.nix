@@ -58,7 +58,7 @@
     ./avahi.nix
     ./bookwyrm.nix
     ./fix-ssh-auth-sock.nix
-    ((import ./restic.nix) { s3Bucket = "mennisch-restic" })
+    ((import ./restic.nix) { s3Bucket = "mennisch-restic"; })
     ./tmux.nix
     ./user-root.nix
     ((import ./vaultwarden.nix) {
