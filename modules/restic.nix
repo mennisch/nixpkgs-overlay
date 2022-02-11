@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }: let
   cfg = config.services;
   defaults = {
-    environmentFile = "/var/lib/restic/environment";
-    passwordFile = "/var/lib/restic/repository-passphrase";
+    environmentFile = "/var/lib/restic/.env";
+    passwordFile = "/var/lib/restic/passphrase";
     pruneOpts = [
       "--keep-daily 7"
       "--keep-weekly 5"
