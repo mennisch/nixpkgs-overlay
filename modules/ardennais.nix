@@ -61,7 +61,13 @@
     ./restic.nix
     ./tmux.nix
     ./user-root.nix
-    ((import ./vaultwarden.nix) "172.27.1.2")
+    ((import ./vaultwarden.nix) {
+      addr = "172.27.1.2";
+      domain = "https://bw.mennisch.net";
+      orgName = "mennisch";
+      smtpFrom = "thinkerer@mennisch.net";
+      smtpName = "thinkerer";
+    })
   ];
   networking = {
     domain = "mennish.net";
