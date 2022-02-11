@@ -61,7 +61,7 @@
     ./restic.nix
     ./tmux.nix
     ./user-root.nix
-    ./vaultwarden.nix
+    ((import ./vaultwarden.nix) "172.27.1.2")
   ];
   networking = {
     domain = "mennish.net";

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+addr: { config, lib, pkgs, ... }: {
   networking = {
     firewall.allowedTCPPorts = [ 8000 ];
   };
@@ -26,7 +26,7 @@
         DOMAIN = "https://bw.mennisch.net";
         INVITATION_ORG_NAME = "mennisch";
         REQUIRE_DEVICE_EMAIL = false;
-        ROCKET_ADDRESS = "172.27.1.2";
+        ROCKET_ADDRESS = "${addr}";
         ROCKET_PORT = 8000;
         SIGNUPS_ALLOWED = false;
         SIGNUPS_VERIFY = true;
