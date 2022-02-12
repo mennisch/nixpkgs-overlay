@@ -6,6 +6,7 @@
     "${modulesPath}/virtualisation/amazon-image.nix"
     ./avahi.nix
     ./fix-ssh-auth-sock.nix
+    ./nix.nix
     ./system-packages.nix
     ./tmux.nix
   ];
@@ -19,14 +20,6 @@
       "172.27.1.3" = [ "aurochs.local" ];
     };
   };
-  nix = {
-    autoOptimiseStore = true;
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 30d";
-    };
-  };
-  nixpkgs.config.allowUnfree = true;
   programs = {
     git = {
       enable = true;
@@ -125,13 +118,7 @@
       size = 1024;
     }
   ];
-  system = {
-    autoUpgrade = {
-      allowReboot = true;
-      enable = true;
-    };
-    stateVersion = "21.11";
-  };
+  system.stateVersion = "21.11";
   # There's a bug in 21.11 where nscd does not start on boot causing avahi name
   # resolution to fail.  This is the fix from the PR
   # (https://github.com/NixOS/nixpkgs/pull/154620).  It should get released
