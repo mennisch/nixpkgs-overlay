@@ -6,6 +6,7 @@
     "${modulesPath}/virtualisation/amazon-image.nix"
     ./avahi.nix
     ./fix-ssh-auth-sock.nix
+    ./system-packages.nix
     ./tmux.nix
   ];
   networking = {

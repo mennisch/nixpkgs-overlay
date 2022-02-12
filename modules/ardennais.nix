@@ -59,6 +59,7 @@
     ./bookwyrm.nix
     ./fix-ssh-auth-sock.nix
     ((import ./restic.nix) { s3Bucket = "mennisch-restic"; })
+    ./system-packages.nix
     ./tmux.nix
     ./user-root.nix
     ./vaultwarden.nix
