@@ -61,13 +61,7 @@
     ((import ./restic.nix) { s3Bucket = "mennisch-restic"; })
     ./tmux.nix
     ./user-root.nix
-    ((import ./vaultwarden.nix) {
-      addr = "172.27.1.2";
-      domain = "https://bw.mennisch.net";
-      orgName = "mennisch";
-      smtpFrom = "thinkerer@mennisch.net";
-      smtpName = "thinkerer";
-    })
+    ./vaultwarden.nix
   ];
   networking = {
     domain = "mennish.net";
