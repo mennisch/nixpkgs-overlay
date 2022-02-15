@@ -2,7 +2,7 @@
 { ... } :
 let
   override = import (builtins.fetchGit {
-    url = "git@github.com:mennisch/nixpkgs.git";
+    url = "git@github.com:mennisch/nixpkgs-overlay.git";
     ref = "main";
   });
   mennisch = override {};
