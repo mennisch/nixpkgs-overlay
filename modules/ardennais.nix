@@ -58,6 +58,7 @@
     ./avahi.nix
     ./bookwyrm.nix
     ./fix-ssh-auth-sock.nix
+    ./git.nix
     ./nix.nix
     ((import ./restic.nix) { s3Bucket = "mennisch-restic"; })
     ./starship.nix
@@ -79,16 +80,8 @@
     useDHCP = false;
   };
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
-  programs = {
-    git = {
-      config.init.defaultBranch = "main";
-      enable = true;
-    };
-  };
   services = {
-    avahi = {
-      interfaces = [ "eth0" ];
-    };
+    avahi.interfaces = [ "eth0" ];
     openssh = {
       enable = true;
       passwordAuthentication = false;
@@ -119,15 +112,13 @@
   };
   users = {
     mutableUsers = false;
-    users = {
-      thinkerer = {
-        extraGroups = [ "wheel" ];
-        group = "users";
-        hashedPassword = "$6$V.wyLwsIRXgOnfOn$P/.IxvGts/LkW6VtGazZyK1nfXPyt8slpvSBSoWBwKpqh8a7vSbdZMuO3p4S3h3SZFLV.PFHESXejWuV.MqzG0";
-        isNormalUser = true;
-        openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlMoUDAszgQS6UX5jGi+ON0gtxwbwM6gb4nkFEwchJF thinkerer@mennisch.net" ];
-        uid = 1000;
-      };
+    users.thinkerer = {
+      extraGroups = [ "wheel" ];
+      group = "users";
+      hashedPassword = "$6$V.wyLwsIRXgOnfOn$P/.IxvGts/LkW6VtGazZyK1nfXPyt8slpvSBSoWBwKpqh8a7vSbdZMuO3p4S3h3SZFLV.PFHESXejWuV.MqzG0";
+      isNormalUser = true;
+      openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGlMoUDAszgQS6UX5jGi+ON0gtxwbwM6gb4nkFEwchJF thinkerer@mennisch.net" ];
+      uid = 1000;
     };
   };
 }

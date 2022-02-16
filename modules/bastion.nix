@@ -6,6 +6,7 @@
     "${modulesPath}/virtualisation/amazon-image.nix"
     ./avahi.nix
     ./fix-ssh-auth-sock.nix
+    ./git.nix
     ./nix.nix
     ./starship.nix
     ./system-packages.nix
@@ -18,19 +19,12 @@
     hosts = {
       "172.27.1.1" = [ "bastion.local" ];
       "172.27.1.2" = [ "ardennais.local" ];
-      "172.27.1.3" = [ "aurochs.local" ];
     };
   };
-  programs = {
-    git = {
-      enable = true;
-      config.init.defaultBranch = "main";
-    };
-    ssh.extraConfig = ''
-      Host *.local
-        ForwardAgent yes
-    '';
-  };
+  programs.ssh.extraConfig = ''
+    Host *.local
+      ForwardAgent yes
+  '';
   security = {
     acme = {
       acceptTerms = true;
