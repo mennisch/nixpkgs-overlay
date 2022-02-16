@@ -60,6 +60,7 @@
     ./fix-ssh-auth-sock.nix
     ./nix.nix
     ((import ./restic.nix) { s3Bucket = "mennisch-restic"; })
+    ./starship.nix
     ./system-packages.nix
     ./tmux.nix
     ./user-root.nix

@@ -7,6 +7,7 @@
     ./avahi.nix
     ./fix-ssh-auth-sock.nix
     ./nix.nix
+    ./starship.nix
     ./system-packages.nix
     ./tmux.nix
   ];
