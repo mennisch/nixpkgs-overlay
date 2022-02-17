@@ -1,4 +1,4 @@
-{ lib, modulesPath, pkgs, ... }: {
+{ lib, modulesPath, ... }: {
   boot.cleanTmpDir = true;
   documentation.nixos.enable = false;
   ec2.hvm = true;
@@ -25,18 +25,17 @@
     Host *.local
       ForwardAgent yes
   '';
-  security = {
-    acme = {
-      acceptTerms = true;
-      certs."mennisch.net".extraDomainNames = [
-        "books.mennisch.net"
-        "books2.mennisch.net"
-        "bw.mennisch.net"
-      ];
-      email = "thinkerer@mennisch.net";
-    };
+  security.acme = {
+    acceptTerms = true;
+    certs."mennisch.net".extraDomainNames = [
+      "books.mennisch.net"
+      "books2.mennisch.net"
+      "bw.mennisch.net"
+    ];
+    email = "thinkerer@mennisch.net";
   };
   services = {
+    avahi.interfaces = [ "ztuze32mv7" ];
     nginx = {
       appendHttpConfig = ''
         # blocked IPs:
@@ -93,12 +92,7 @@
     };
     openssh = {
       enable = true;
-      listenAddresses = [
-        {
-          addr = "172.27.1.1";
-          port = 22;
-        }
-      ];
+      listenAddresses = [ { addr = "172.27.1.1"; port = 22; } ];
       # this is mkForce, because this is also set in amazon-image.nix
       permitRootLogin = lib.mkForce "no";
     };
@@ -107,12 +101,7 @@
       joinNetworks = [ "9f77fc393e410b81" ];
     };
   };
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 1024;
-    }
-  ];
+  swapDevices = [ { device = "/swapfile"; size = 1024; } ];
   system.stateVersion = "21.11";
   # There's a bug in 21.11 where nscd does not start on boot causing avahi name
   # resolution to fail.  This is the fix from the PR

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, pkgs, ... }: {
   boot = {
     initrd = {
       availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
@@ -52,7 +52,7 @@
   hardware = {
     enableRedistributableFirmware = true;
     # high-resolution display
-    video.hidpi.enable = lib.mkDefault true;
+    video.hidpi.enable = true;
   };
   imports = [
     ./avahi.nix
@@ -79,9 +79,8 @@
     # replicates the default behaviour.
     useDHCP = false;
   };
-  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
+  powerManagement.cpuFreqGovernor = "ondemand";
   services = {
-    avahi.interfaces = [ "eth0" ];
     openssh = {
       enable = true;
       passwordAuthentication = false;
