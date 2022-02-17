@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ ... }: {
   programs.git = {
     config = {
       init.defaultBranch = "main";

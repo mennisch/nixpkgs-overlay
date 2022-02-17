@@ -1,4 +1,4 @@
-{ lib, modulesPath, pkgs, ... }: {
+{ ... }: {
   nix = {
     autoOptimiseStore = true;
     gc = {
