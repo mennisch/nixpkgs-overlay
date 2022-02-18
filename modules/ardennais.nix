@@ -57,6 +57,7 @@
   imports = [
     ./avahi.nix
     ./bookwyrm.nix
+    ./deploy-key.nix
     ./fix-ssh-auth-sock.nix
     ./git.nix
     ./nix.nix

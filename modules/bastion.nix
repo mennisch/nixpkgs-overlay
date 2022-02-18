@@ -5,6 +5,7 @@
   imports = [
     "${modulesPath}/virtualisation/amazon-image.nix"
     ./avahi.nix
+    ./deploy-key.nix
     ./fix-ssh-auth-sock.nix
     ./git.nix
     ./nix.nix
