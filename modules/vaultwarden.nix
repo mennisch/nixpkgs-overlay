@@ -30,11 +30,10 @@
         SMTP_HOST = "email-smtp.us-east-1.amazonaws.com";
         SMTP_PORT = 587;
         SMTP_SSL = true;
-        SMTP_USERNAME = "AKIATT5PUYZJCTPX5VVZ";
       };
       dbBackend = "postgresql";
       enable = true;
-      environmentFile = "/var/lib/bitwarden_rs/.env";
+      environmentFile = "/var/lib/bitwarden_rs/config";
     };
   };
 }
