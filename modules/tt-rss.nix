@@ -32,9 +32,6 @@
         fromAddress = "thinkerer@mennisch.net";
         fromName = "thinkerer";
       };
-      extraConfig = ''
-        putenv('TTRSS_LOG_SENT_MAIL=true');
-      '';
       enable = true;
       registration = {
         enable = true;
