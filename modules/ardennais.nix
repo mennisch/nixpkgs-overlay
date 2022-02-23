@@ -62,9 +62,11 @@
     ./git.nix
     ./nix.nix
     ((import ./restic.nix) { s3Bucket = "mennisch-restic"; })
+    ./ssmtp.nix
     ./starship.nix
     ./system-packages.nix
     ./tmux.nix
+    ./tt-rss.nix
     ./user-root.nix
     ./vaultwarden.nix
   ];

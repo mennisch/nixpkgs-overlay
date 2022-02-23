@@ -32,6 +32,7 @@
       "books.mennisch.net"
       "books2.mennisch.net"
       "bw.mennisch.net"
+      "reader.mennisch.net"
     ];
     email = "thinkerer@mennisch.net";
   };
@@ -82,6 +83,13 @@
           forceSSL = true;
           locations."/" = {
             proxyPass = "http://ardennais.local:8000";
+          };
+          useACMEHost = "mennisch.net";
+        };
+        "reader.mennisch.net" = {
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://ardennais.local:80";
           };
           useACMEHost = "mennisch.net";
         };
