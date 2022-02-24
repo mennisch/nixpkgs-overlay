@@ -1,6 +1,6 @@
 { ... } : {
   services.ssmtp = {
-    authUser = "AKIATT5PUYZJGUQEGJEE";
+    authUser = "AKIATT5PUYZJK7H2YB5D";
     authPassFile = "/var/lib/ssmtp/password";
     enable = true;
     domain = "mennisch.net";
