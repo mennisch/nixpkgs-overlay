@@ -1,4 +1,4 @@
-{ lib, modulesPath, ... }: {
+{ lib, modulesPath, pkgs, ... }: {
   boot.cleanTmpDir = true;
   documentation.nixos.enable = false;
   ec2.hvm = true;
@@ -21,6 +21,10 @@
       "172.27.1.1" = [ "bastion.local" ];
       "172.27.1.2" = [ "ardennais.local" ];
     };
+  };
+  nix = {
+    extraOptions = "experimental-features = nix-command flakes";
+    package = pkgs.nixFlakes;
   };
   programs.ssh.extraConfig = ''
     Host *.local
